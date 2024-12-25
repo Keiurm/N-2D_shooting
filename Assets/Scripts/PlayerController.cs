@@ -31,10 +31,14 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D c)
     {
-        Destroy(c.gameObject);
+        if (c.gameObject.tag == "Enemy")
+        {
+            Destroy(c.gameObject);
 
-        spaceship.Explosion();
+            spaceship.Explosion();
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
+
     }
 }
