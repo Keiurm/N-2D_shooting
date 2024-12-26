@@ -9,7 +9,6 @@ public class DestroyObject : MonoBehaviour
         if (c.gameObject.tag == "Enemy")
         {
             Destroy(c.gameObject);
-            Destroy(gameObject);
         }
         else if (c.gameObject.tag == "PlayerBullet")
         {

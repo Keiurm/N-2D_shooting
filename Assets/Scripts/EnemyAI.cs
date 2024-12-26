@@ -6,6 +6,8 @@ public class EnemyAI : MonoBehaviour
 {
     CommonSpaceship spaceship;
 
+    public int hp = 5;
+
     IEnumerator Start()
     {
         spaceship = GetComponent<CommonSpaceship>();
@@ -21,9 +23,24 @@ public class EnemyAI : MonoBehaviour
             yield return new WaitForSeconds(spaceship.shotDelay);
         }
     }
-
-    void Update()
+    private void OnTriggerEnter2D(Collider2D c)
     {
+        if (c.gameObject.tag == "PlayerBullet")
+        {
+            Transform playerBulletTransform = c.transform.parent;
 
+            BulletBehaviour bullet = playerBulletTransform.GetComponent<BulletBehaviour>();
+
+            hp = hp - bullet.power;
+
+            Destroy(c.gameObject);
+
+            if (hp <= 0)
+            {
+                spaceship.Explosion();
+                Destroy(gameObject);
+            }
+        }
     }
+
 }
